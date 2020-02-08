@@ -45,12 +45,12 @@ class NewsListFragment : Fragment(R.layout.news_list_fragment), KodeinAware {
             LinearLayoutManager(requireActivity(), RecyclerView.VERTICAL, false)
 
         viewModel.pagedList
-            .observe(this, Observer {
+            .observe(viewLifecycleOwner, Observer {
                 newsAdapter.submitList(it)
             })
 
         viewModel.networkState
-            .observe(this, Observer {
+            .observe(viewLifecycleOwner, Observer {
                 newsAdapter.setNetworkState(it)
             })
     }
@@ -58,7 +58,7 @@ class NewsListFragment : Fragment(R.layout.news_list_fragment), KodeinAware {
     private fun initSwipeToRefresh() {
 
         viewModel.refreshState
-            .observe(this, Observer {
+            .observe(viewLifecycleOwner, Observer {
                 newsSwipeRefreshLayout.isRefreshing = NetworkState.LOADING == it
             })
 
