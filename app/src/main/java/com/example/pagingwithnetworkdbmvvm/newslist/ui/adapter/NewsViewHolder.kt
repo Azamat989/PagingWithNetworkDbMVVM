@@ -1,4 +1,4 @@
-package com.example.pagingwithnetworkdbmvvm.adapter
+package com.example.pagingwithnetworkdbmvvm.newslist.ui.adapter
 
 import android.content.Intent
 import android.net.Uri
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pagingwithnetworkdbmvvm.R
-import com.example.pagingwithnetworkdbmvvm.data.NewsBlock
+import com.example.pagingwithnetworkdbmvvm.newslist.domain.NewsBlock
 import com.example.pagingwithnetworkdbmvvm.util.getProgressDrawable
 import com.example.pagingwithnetworkdbmvvm.util.loadImage
 import kotlinx.android.synthetic.main.news_block_item.view.*

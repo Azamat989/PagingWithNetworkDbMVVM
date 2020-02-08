@@ -1,4 +1,4 @@
-package com.example.pagingwithnetworkdbmvvm.adapter
+package com.example.pagingwithnetworkdbmvvm.newslist.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View

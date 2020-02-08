@@ -1,4 +1,4 @@
-package com.example.pagingwithnetworkdbmvvm.data
+package com.example.pagingwithnetworkdbmvvm.newslist.domain
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

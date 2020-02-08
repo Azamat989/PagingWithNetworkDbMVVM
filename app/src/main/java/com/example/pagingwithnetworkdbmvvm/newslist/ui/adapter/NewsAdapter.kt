@@ -1,34 +1,21 @@
-package com.example.pagingwithnetworkdbmvvm.adapter
+package com.example.pagingwithnetworkdbmvvm.newslist.ui.adapter
 
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pagingwithnetworkdbmvvm.R
-import com.example.pagingwithnetworkdbmvvm.data.NewsBlock
+import com.example.pagingwithnetworkdbmvvm.newslist.domain.NewsBlock
 import com.example.pagingwithnetworkdbmvvm.util.NetworkState
 
 class NewsAdapter(
     private val retryCallback: () -> Unit
-): PagedListAdapter<NewsBlock, RecyclerView.ViewHolder>(diffCallback) {
+) : PagedListAdapter<NewsBlock, RecyclerView.ViewHolder>(diffCallback) {
 
     private var networkState: NetworkState? = null
 
-    companion object {
-        private val diffCallback = object: DiffUtil.ItemCallback<NewsBlock>() {
-
-            override fun areItemsTheSame(oldItem: NewsBlock, newItem: NewsBlock): Boolean {
-                return oldItem.title == newItem.title
-            }
-
-            override fun areContentsTheSame(oldItem: NewsBlock, newItem: NewsBlock): Boolean {
-                return oldItem == newItem
-            }
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when(viewType) {
+        return when (viewType) {
             R.layout.news_block_item -> NewsViewHolder.create(parent)
             R.layout.network_state_item -> NetworkStateViewHolder.create(parent, retryCallback)
             else -> throw IllegalArgumentException("Unknown view type")
@@ -37,7 +24,11 @@ class NewsAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            R.layout.news_block_item -> (holder as NewsViewHolder).bindLayout(getItem(position)!!)
+            R.layout.news_block_item -> {
+                getItem(position)?.let {
+                    (holder as NewsViewHolder).bindLayout(it)
+                }
+            }
             R.layout.network_state_item -> (holder as NetworkStateViewHolder).bind(networkState)
         }
     }
@@ -53,7 +44,8 @@ class NewsAdapter(
         }
     }
 
-    private fun hasExtraRow(): Boolean = (networkState != null && networkState != NetworkState.LOADED)
+    private fun hasExtraRow(): Boolean =
+        (networkState != null && networkState != NetworkState.LOADED)
 
     /**
      * Set the current network state to the adapter
@@ -80,10 +72,23 @@ class NewsAdapter(
                         //LOADED -> LOADING
                         notifyItemInserted(super.getItemCount())
                     }
-                } else if (hadExtraRow && previousState != newNetworkState){
+                } else if (hadExtraRow && previousState != newNetworkState) {
                     //LOADING -> FAILED
                     notifyItemChanged(itemCount - 1)
                 }
+            }
+        }
+    }
+
+    companion object {
+        private val diffCallback = object : DiffUtil.ItemCallback<NewsBlock>() {
+
+            override fun areItemsTheSame(oldItem: NewsBlock, newItem: NewsBlock): Boolean {
+                return oldItem.title == newItem.title
+            }
+
+            override fun areContentsTheSame(oldItem: NewsBlock, newItem: NewsBlock): Boolean {
+                return oldItem == newItem
             }
         }
     }

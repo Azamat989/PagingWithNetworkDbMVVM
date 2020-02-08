@@ -1,9 +1,10 @@
-package com.example.pagingwithnetworkdbmvvm.repository
+package com.example.pagingwithnetworkdbmvvm.newslist.domain
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.paging.PagedList
-import com.example.pagingwithnetworkdbmvvm.data.NewsBlock
 import com.example.pagingwithnetworkdbmvvm.util.NetworkState
+import io.reactivex.Flowable
 
 class Listing<T> (
     val pagedList: LiveData<PagedList<T>>,

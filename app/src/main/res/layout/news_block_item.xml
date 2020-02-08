@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linear_layout_news_item"
-        android:background="#2A000000"
-        android:padding="16dp"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical"
+        android:padding="16dp">
 
     <TextView
-            android:text="New's Title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/text_view_news_title"
-            android:textSize="24sp"
-            android:textStyle="bold"/>
-
-    <TextView
-            android:text="00/00/00"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:text="New's Title" />
+
+    <TextView
             android:id="@+id/text_view_news_date"
-            android:padding="8dp"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            tools:text="00/00/00" />
 
     <ImageView
+            android:id="@+id/image_view_news_item"
             android:layout_width="match_parent"
             android:layout_height="150dp"
+            android:scaleType="centerCrop"
             app:srcCompat="@android:color/background_dark"
-            android:id="@+id/image_view_news_item"
-            android:scaleType="centerCrop"/>
+            tools:ignore="ContentDescription" />
 
     <TextView
-            android:text="description of newsItemBlock"
+            android:id="@+id/text_view_news_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/text_view_news_description"
-            android:padding="8dp"/>
+            android:padding="8dp"
+            tools:text="description of newsItemBlock" />
 
 </LinearLayout>
